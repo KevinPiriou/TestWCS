@@ -3,48 +3,50 @@
 <main>
   <!-- New member form -->
   <div class="main">
-  <div class="card border-dark text-light text-center m-4 p-4 mx-4 mb-4 bg-primary rounded">
-  <div class="fade-in-image">
-    <%= image_tag 'Viking_Boat_clip_art.svg', alt:'viking boat'%>
-  </div><% if User.all.length < 50 %>
-  <h2 class="mt-5">Ajouter un(e) Argonaute</h2>
-<div class="form-group">
-  <%= form_tag url_for(action: 'create'), method: "post" do %>
-    <%= label_tag 'Nom'%>
-		  <%= text_field_tag :name,"",id:'name', class: 'form-control input rounded', placeholder: 'Nom'%>
-		    <br><%= render 'layouts/alert' %>
-        <div><% end %>
-        <% if User.all.length < 50 %>
-      <%= submit_tag "AJOUTER A L'EQUIPAGE", class:"btn btn-outline-success text-light mt-2", id:"create"%>
+    <div class="card border-dark text-light text-center m-4 p-4 mx-4 mb-4 bg-primary rounded">
+      <div class="fade-in-image">
+        <%= image_tag 'Viking_Boat_clip_art.svg', alt:'viking boat'%>
+      </div><% if User.all.length < 50 %>
+      <h2 class="mt-5">Ajouter un(e) Argonaute</h2>
+      <div class="form-group">
+        <%= form_tag url_for(action: 'create'), method: "post" do %>
+        <%= label_tag 'Nom'%>
+		    <%= text_field_tag :name,"",id:'name', class: 'form-control input rounded', placeholder: 'Nom'%>
+		    <br>
+        <%= render 'layouts/alert' %>
+        <% end %>
+        <div>
+          <% if User.all.length < 50 %>
+          <%= submit_tag "AJOUTER A L'EQUIPAGE", class:"btn btn-outline-success text-light mt-2", id:"create"%>
+          <% end %>
+        </div>
+      </div>
+	    <% end %>
+      <% if User.all.length < 50 %>
+        <%= button_to 'EQUIPAGE ALEATOIRE DE 9 PERSONNES', make_list_url, class:"btn btn-outline-secondary mt-5 text-light" %>
+        <%= button_to 'EQUIPAGE ALEATOIRE COMPLET (moche)', make_complete_list_url, class:"btn btn-outline-info mt-2 text-light" %>
       <% end %>
       </div>
+      <!-- Member list -->
+      <div class="card border-dark text-center m-4 p-4 mx-4 mb-4 mb-4 rounded" id="list" style="width: 70rem" >
+        <% if User.all.length < 50 %>
+        <h1>Membres de l'équipage actuel de l'Argo: <%= User.all.length %>/50</h1>
+        <% else %>
+        <h1 class="d-inline p-2 bg-danger text-white">COMPLET</h1>
+        <% end %>
+      <td><%= button_to '📛 SUPPRIMER LA LISTE 📛', destroy_all_user_path, class:"btn btn-danger" ,method: :delete %></td>
+      <div class="d-flex flex-wrap justify-content-center">
+        <% @users.each do |user| %>
+          <div class="cardi m-2 p-2 text-light bg-dark border-info rounded-circle " style="width: 17.5rem;">
+            <div class="center">
+              <img src="https://img.icons8.com/external-others-maxicons/48/000000/external-spartan-greek-mythology-others-maxicons-4.png"/>
+            </div><span class="badge badge-info">ARGONAUTE</span><br>
+            <br><em class="text-success"> - <%= user.name.upcase%> - </em><br><br>
+            <p class="text-muted">Ajouté le <%= user.created_at.strftime("%d %b") %></p>
+            <td><%= button_to 'RETIRER', user, class:"btn btn-outline-danger",style:"margin:5px" ,method: :delete %></td>
+          </div>
+          <% end %>
       </div>
-	<% end %>
-  <% if User.all.length < 50 %>
-  <%= button_to 'EQUIPAGE ALEATOIRE DE 9 PERSONNES', make_list_url, class:"btn btn-outline-secondary mt-5 text-light" %>
-  <%= button_to 'EQUIPAGE ALEATOIRE COMPLET (moche)', make_complete_list_url, class:"btn btn-outline-info mt-2 text-light" %>
-  <% end %>
-  </div>
-  <!-- Member list -->
-  <div class="card border-dark text-center m-4 p-4 mx-4 mb-4 mb-4 rounded" id="list" style="width: 70rem" >
-  <% if User.all.length < 50 %>
-    <h1>Membres de l'équipage actuel de l'Argo: <%= User.all.length %>/50</h1>
-<% else %>
-    <h1 class="d-inline p-2 bg-danger text-white">COMPLET</h1>
-    <% end %>
-    <td><%= button_to '📛 SUPPRIMER LA LISTE 📛', destroy_all_user_path, class:"btn btn-danger" ,method: :delete %></td>
-    <div class="d-flex flex-wrap justify-content-center">
-            <% @users.each do |user| %>
-              <div class="cardi m-2 p-2 text-light bg-dark border-info rounded-circle " style="width: 17.5rem;">
-                <div class="center">
-                  <img src="https://img.icons8.com/external-others-maxicons/48/000000/external-spartan-greek-mythology-others-maxicons-4.png"/>
-                </div><span class="badge badge-info">ARGONAUTE</span><br>
-                <br><em class="text-success"> - <%= user.name.upcase%> - </em><br><br>
-                <p class="text-muted">Ajouté le <%= user.created_at.strftime("%d %b") %></p>
-                <td><%= button_to 'RETIRER', user, class:"btn btn-outline-danger",style:"margin:5px" ,method: :delete %></td>
-              </div>
-            <% end %>
-            </div>
             
   </div>
 </main>

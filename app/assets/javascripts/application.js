@@ -16,9 +16,7 @@
 
 const pill = document.getElementById("pill");
 const body = document.getElementById("bg");
-document.addEventListener("DOMContentLoaded", function () {
-  getStyles();
-});
+
 function themeChange() {
   pill.classList.toggle("active");
   if (pill.classList.contains("active")) {
@@ -28,9 +26,4 @@ function themeChange() {
     body.style.backgroundColor = "#61ae9c";
     localStorage.setItem("bgColor", "#61ae9c");
   }
-}
-function getStyles() {
-  let currentBgcolor = localStorage.getItem("bgColor") | "#61ae9c";
-
-  document.body.style.backgroundColor = currentBgcolor;
 }
