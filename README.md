@@ -85,7 +85,7 @@ heroku run rails db:migrate
 heroku run rails db:seed
 ```
 
-[HEROKU](https://testwcs.herokuapp.com/)
+[HEROKU](https://argo-wcs.herokuapp.com/)
 
 ## Auteur du projet:
 

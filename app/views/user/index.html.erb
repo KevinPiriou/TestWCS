@@ -14,8 +14,9 @@
 		    <%= text_field_tag :name,"",id:'name', class: 'form-control input rounded', placeholder: 'Nom'%>
 		    <br>
         <%= render 'layouts/alert' %>
-        <% end %>
+        
         <div>
+        <% end %>
           <% if User.all.length < 50 %>
           <%= submit_tag "AJOUTER A L'EQUIPAGE", class:"btn btn-outline-success text-light mt-2", id:"create"%>
           <% end %>
